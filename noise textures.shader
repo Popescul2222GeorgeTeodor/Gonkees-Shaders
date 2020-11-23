@@ -98,9 +98,7 @@ float cellular_noise(vec2 coord) {
 	return min_dist;
 }
 
-float fbm(vec2 coord){
-	int OCTAVES = 4;
-	
+float fbm(vec2 coord,int OCTAVES){
 	float normalize_factor = 0.0;
 	float value = 0.0;
 	float scale = 0.5;
