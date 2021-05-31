@@ -65,3 +65,8 @@ func get_value():
 func get_aim():
 	var dir= get_value();
 	return atan2(dir.y,dir.x);
+#same as get_aim() except it uses degrees
+#use rotation_degrees	
+func get_aim_degrees():
+	var dir= get_value();
+	return rad2deg(atan2(dir.y,dir.x));
