@@ -52,6 +52,7 @@ func _input(event):
 		ongoing_drag = -1
 
 #this is what you use to move the character
+#values between -1 and 1 on both axis
 func get_value():
 	if get_button_pos().length() > threshold:
 		if analog:
