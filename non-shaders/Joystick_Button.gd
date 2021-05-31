@@ -5,13 +5,17 @@ extends TouchScreenButton
 
 # Change these based on the size of your button and outer sprite
 #Joystick's handle radius,keep same value on both coordinates
-export(Vector2) var radius = Vector2(32,32)
+export(float) var handle_radius = 32
+#left this here so as to not break anything
+var radius = Vector2(handle_radius,handle_radius)
 #max distance for the handle to move 
 export(int) var boundary = 64
 #keeps track of current drag,-1 means nothing's touching the screen
 var ongoing_drag = -1
 #at what speed the handle will return to center
 export(int) var return_accel = 20
+#disable the return of the handle to the center
+export(bool) var disable_return = false
 #enable this to see if the joystick is working
 #WARNING,your console will get spammed with info
 export(bool) var debugging = false;
@@ -24,7 +28,8 @@ export(bool) var analog = false
 func _process(delta):
 	if debugging:
 		print(get_value())
-	if ongoing_drag == -1:
+		print(get_aim())
+	if ongoing_drag == -1 and !disable_return:
 		var pos_difference = (Vector2(0, 0) - radius) - position
 		position += pos_difference * return_accel * delta
 
@@ -50,7 +55,7 @@ func _input(event):
 func get_value():
 	if get_button_pos().length() > threshold:
 		if analog:
-			return get_button_pos()
+			return get_button_pos()/boundary
 		else:
 			return get_button_pos().normalized()
 	return Vector2(0, 0)
