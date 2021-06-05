@@ -77,8 +77,8 @@ float perlin_noise(vec2 coord,bool abs_value) {
 	float topmix = mix(tldot, trdot, cubic.x);
 	float botmix = mix(bldot, brdot, cubic.x);
 	float wholemix = mix(topmix, botmix, cubic.y);
-	
-	return 0.5 + wholemix;
+	if(!abs_value)return 0.5 + wholemix;
+	else return wholemix;
 }
 
 //voronoi
@@ -151,10 +151,10 @@ void fragment() {
 	float noise;
 	
 //	noise = rand(coord);
-//	noise = value_noise(coord);
+	noise = value_noise(coord);
 //	noise = perlin_noise(coord,false);
 //	noise = cellular_noise(coord);
-	noise = mix_fbm(coord,8,0.5,5,2,1,false);
+//	noise = mix_fbm(coord,8,0.5,5,2,1,false);
 	
 	COLOR = vec4(vec3(noise),1);
 }
