@@ -129,7 +129,6 @@ float fbm(vec2 coord,int OCTAVES,float normalize_factor,float scale,float decay,
 //parameters are the same as fbm()
 //type determines the first noise type
 float mix_fbm(vec2 coord,int OCTAVES,float normalize_factor,float scale,float decay,int type,bool abs_value){
-	
 	float value = 0.0;
 
 	for(int i = 0; i < OCTAVES; i++){
@@ -151,9 +150,10 @@ void fragment() {
 	float noise;
 	
 //	noise = rand(coord);
-	noise = value_noise(coord);
+//	noise = value_noise(coord);
 //	noise = perlin_noise(coord,false);
 //	noise = cellular_noise(coord);
+	noise = fbm(coord,8,0.5,5,2,2,false);
 //	noise = mix_fbm(coord,8,0.5,5,2,1,false);
 	
 	COLOR = vec4(vec3(noise),1);
